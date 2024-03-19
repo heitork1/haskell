@@ -8,3 +8,8 @@ fib n = fib (n-1) + fib (n-2)
 f _ 8 _ = 20
 f _ _ 9 = 30
 f _ _ _ = 0
+
+a 1 = sqrt 6
+a n = sqrt (6 + a (n-1))
+
+somaie n m = soma (m-1) - soma n
