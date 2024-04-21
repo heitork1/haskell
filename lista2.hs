@@ -14,3 +14,7 @@ inverso (x:xs) = inverso xs ++ [x]
 nUltimos _ [] = []
 nUltimos n (x:xs) | n >= length (x:xs) = (x:xs)
                | otherwise = nUltimos n xs 
+
+soma2 [] _ = []
+soma2 _ [] = []
+soma2 (x:xs) (y:ys) = (x+y) : soma2 xs ys 
