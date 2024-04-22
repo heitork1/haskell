@@ -18,3 +18,22 @@ nUltimos n (x:xs) | n >= length (x:xs) = (x:xs)
 soma2 [] _ = []
 soma2 _ [] = []
 soma2 (x:xs) (y:ys) = (x+y) : soma2 xs ys 
+
+
+pot2 n = [2^x | x <- [1..n]]
+
+intercalacao [] ys = ys
+intercalacao xs [] = xs
+intercalacao (x:xs) (y:ys) | x <= y = x : intercalacao xs (y:ys)
+                          | otherwise = y : intercalacao (x:xs)ys
+
+menor [x] = x
+menor (x:y:xs) = if x <= y then menor (x:xs) else menor (y:xs)
+
+removerElem _ [] = [] 
+removerElem y (x:xs)
+    | y == x = xs 
+    | otherwise = x : removerElem y xs 
+
+ordenar [] = []
+ordenar (x:xs) = menor (x:xs) : ordenar (removerElem (menor (x:xs))(x:xs))  
