@@ -37,3 +37,11 @@ removerElem y (x:xs)
 
 ordenar [] = []
 ordenar (x:xs) = menor (x:xs) : ordenar (removerElem (menor (x:xs))(x:xs))  
+
+insereOrd n [] = [n]
+insereOrd n (x:xs) | pertence n (x:xs) = (x:xs)
+                   | n <= x = n : (x:xs)
+                   | otherwise = x : insereOrd n xs
+
+enesimo 1 (x:_) = x  -- Caso base: se n for 1, retorna o primeiro elemento da lista
+enesimo n (_:xs) = enesimo (n - 1) xs  -- Recursivamente, diminui n e avança para o próximo elemento
