@@ -45,3 +45,51 @@ insereOrd n (x:xs) | pertence n (x:xs) = (x:xs)
 
 enesimo 1 (x:_) = x  -- Caso base: se n for 1, retorna o primeiro elemento da lista
 enesimo n (_:xs) = enesimo (n - 1) xs  -- Recursivamente, diminui n e avança para o próximo elemento
+
+--13
+repetir 0 _ = []
+repetir n e = e : repetir (n - 1) e
+
+--14
+removeTab [] = []
+removeTab (x:xs)
+    | x == '\t' = ' ' : removeTab xs 
+    | otherwise = x : removeTab xs
+
+--15
+minusculas [] = []
+minusculas (x:xs) | x == 'A' = 'a' : minusculas xs
+                | x == 'B' = 'b' : minusculas xs  
+                | x == 'C' = 'c' : minusculas xs
+                | x == 'D' = 'd' : minusculas xs
+                | x == 'E' = 'e' : minusculas xs
+                | x == 'F' = 'f' : minusculas xs
+                | x == 'G' = 'g' : minusculas xs
+                | x == 'H' = 'h' : minusculas xs
+                | x == 'I' = 'i' : minusculas xs
+                | x == 'J' = 'j' : minusculas xs
+                | x == 'K' = 'k' : minusculas xs
+                | x == 'L' = 'l' : minusculas xs
+                | x == 'M' = 'm' : minusculas xs
+                | x == 'N' = 'n' : minusculas xs
+                | x == 'O' = 'o' : minusculas xs
+                | x == 'P' = 'p' : minusculas xs
+                | x == 'Q' = 'q' : minusculas xs
+                | x == 'R' = 'r' : minusculas xs
+                | x == 'S' = 's' : minusculas xs
+                | x == 'T' = 't' : minusculas xs
+                | x == 'U' = 'u' : minusculas xs
+                | x == 'V' = 'v' : minusculas xs
+                | x == 'W' = 'w' : minusculas xs
+                | x == 'X' = 'x' : minusculas xs
+                | x == 'Y' = 'y' : minusculas xs
+                | x == 'Z' = 'z' : minusculas xs
+                | otherwise = x : minusculas xs
+
+--16
+inversoDupla [] = []
+inversoDupla ((x, y):xs) = (y, x) : inversoDupla xs 
+
+--17
+simetrico [] = []
+simetrico ((x,y):xs) = if x == y then True : simetrico xs else False : simetrico xs
