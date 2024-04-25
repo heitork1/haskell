@@ -93,3 +93,15 @@ inversoDupla ((x, y):xs) = (y, x) : inversoDupla xs
 --17
 simetrico [] = []
 simetrico ((x,y):xs) = if x == y then True : simetrico xs else False : simetrico xs
+
+
+--18
+
+numString n
+    | n == 0 = "0"  -- Caso base: se o número for zero, retorna "0"
+    | n < 0 = '-' : numString (-n)  -- Se o número for negativo, adiciona '-' na frente e continua a recursão com o valor absoluto
+    | otherwise = aux n []
+
+aux 0 acc = acc  -- Caso base: se o número for zero, retorna a lista acumuladora
+aux m acc = aux (m `div` 10) (toEnum (m `mod` 10 + 48) : acc) -- Divide o número por 10, adiciona o dígito obtido à lista acumuladora e continua a recursão com o quociente
+
