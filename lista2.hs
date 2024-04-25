@@ -105,3 +105,13 @@ numString n
 aux 0 acc = acc  -- Caso base: se o número for zero, retorna a lista acumuladora
 aux m acc = aux (m `div` 10) (toEnum (m `mod` 10 + 48) : acc) -- Divide o número por 10, adiciona o dígito obtido à lista acumuladora e continua a recursão com o quociente
 
+--19
+stringToInt :: String -> Int
+stringToInt [] = 0
+stringToInt (c:xs)
+    | c == '-' = - (stringToInt xs)
+    | isDigit c = (digitToInt c) * 10 ^ (length xs - 1) + stringToInt xs
+    | otherwise = error "String inválida."
+
+digitToInt :: Char -> Int
+digitToInt c = ord c - ord '0'
