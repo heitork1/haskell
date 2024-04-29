@@ -1,4 +1,6 @@
 -- só posso utilizar : para adicionar os valores a esquerda
+import Data.Char (isDigit, ord)
+
 
 pertence n [] = False
 pertence n (x:xs) | n == x = True
@@ -106,12 +108,36 @@ aux 0 acc = acc  -- Caso base: se o número for zero, retorna a lista acumulador
 aux m acc = aux (m `div` 10) (toEnum (m `mod` 10 + 48) : acc) -- Divide o número por 10, adiciona o dígito obtido à lista acumuladora e continua a recursão com o quociente
 
 --19
-stringToInt :: String -> Int
 stringToInt [] = 0
 stringToInt (c:xs)
     | c == '-' = - (stringToInt xs)
-    | isDigit c = (digitToInt c) * 10 ^ (length xs - 1) + stringToInt xs
+    | isDigit c = (digitToInt c) * 10 ^ (length xs) + stringToInt xs
     | otherwise = error "String inválida."
 
-digitToInt :: Char -> Int
 digitToInt c = ord c - ord '0'
+
+--20
+decBin 0 = "0"
+decBin 1 = "1"
+decBin n = decBin (n `div` 2) ++ show (n `mod` 2)
+
+--21
+binDec [] = 0
+binDec str = binDec' (reverse str) 0
+
+binDec' [] _ = 0
+binDec' (x:xs) pos
+    | x == '1' = 2 ^ pos + binDec' xs (pos + 1)
+    | x == '0' = binDec' xs (pos + 1)
+    | otherwise = error "String inválida."
+
+--22
+trocoCafe :: Int -> Int -> [(Int, Int)]
+trocoCafe valorCafe valorPago = calcularTroco (valorPago - valorCafe) [50, 20, 10, 5]
+
+calcularTroco :: Int -> [Int] -> [(Int, Int)]
+calcularTroco _ [] = []
+calcularTroco _ [moeda] = [(moeda, 1)]
+calcularTroco troco (moeda:moedas)
+    | troco >= moeda = (moeda, troco `div` moeda) : calcularTroco (troco `mod` moeda) moedas
+    | otherwise      = calcularTroco troco moedas
