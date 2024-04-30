@@ -1,7 +1,3 @@
--- só posso utilizar : para adicionar os valores a esquerda
-import Data.Char (isDigit, ord)
-
-
 pertence n [] = False
 pertence n (x:xs) | n == x = True
                   | otherwise = pertence n xs
@@ -108,13 +104,15 @@ aux 0 acc = acc  -- Caso base: se o número for zero, retorna a lista acumulador
 aux m acc = aux (m `div` 10) (toEnum (m `mod` 10 + 48) : acc) -- Divide o número por 10, adiciona o dígito obtido à lista acumuladora e continua a recursão com o quociente
 
 --19
+
 stringToInt [] = 0
 stringToInt (c:xs)
     | c == '-' = - (stringToInt xs)
-    | isDigit c = (digitToInt c) * 10 ^ (length xs) + stringToInt xs
+    | c >= '0' && c <= '9' = (digitToInt c) * 10 ^ (length xs) + stringToInt xs
     | otherwise = error "String inválida."
 
-digitToInt c = ord c - ord '0'
+
+digitToInt c = fromEnum c - fromEnum '0'
 
 --20
 decBin 0 = "0"
