@@ -1,22 +1,24 @@
-import Data.List (sort, group)
-
-type Linha = String
+import Data.List (sortBy, groupBy, nub)
+import Data.Function (on)
 type Doc = String
+type Linha = String
 type Palavra = String
+
+numeraPalavras :: [(Int, Linha)] -> [(Int, Palavra)]
+numeraPalavras linhasNumeradas = concatMap (\(numLinha, linha) -> [(numLinha, palavra) | palavra <- words linha]) linhasNumeradas
 numLinhas :: [Linha] -> [(Int, Linha)]
-numLinhas xs = zip [1..] xs
-numeraPalavras :: [(Int, Linha)] -> [(Int,Palavra)]
-numeraPalavras linhas = concatMap (\(numLinha, linha) -> zip (repeat numLinha) (words linha)) linhas
+numLinhas linhas = zip [1..] linhas
 ordenar :: [(Int, Palavra)] -> [(Int, Palavra)]
-ordenar = sort
+ordenar = sortBy (\(_, p1) (_, p2) -> compare p1 p2)
 agrupar :: [(Int, Palavra)] -> [([Int], Palavra)]
-agrupar = map (\xs -> (map fst xs, snd (head xs))) . group
+agrupar = map (\xs -> (map fst xs, snd (head xs))) . groupBy ((==) `on` snd)
+eliminarRep :: [([Int], Palavra)] -> [([Int], Palavra)]
+eliminarRep = map (\(nums, palavra) -> (nub nums, palavra))
 
 main :: IO ()
 main = do
-    conteudo <- readFile "alice_haskell.txt"
-    print (agrupar (ordenar (numeraPalavras (numLinhas (lines conteudo))))) --print()é geral, putStrLn() é para strings
-  
+     conteudo <- readFile "alice_haskell.txt"
+     print(eliminarRep(agrupar(ordenar(numeraPalavras(numLinhas(lines conteudo))))))
 {-
 import Data.Char (isAlpha, toLower)
 import Data.List (sort, group, nub)
