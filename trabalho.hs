@@ -37,7 +37,8 @@ ins linha palavra (Node w linhas esq dir)
 
 -- A função 'mIndexTree' percorre a lista de tuplas (linha, palavra) e insere cada uma delas na árvore
 mIndexTree :: [(Int, Word')] -> Tree
-mIndexTree = foldr (\(linha, palavra) acc -> ins linha palavra acc) Leaf
+mIndexTree [] = Leaf
+mIndexTree ((linha, palavra):resto) = ins linha palavra (mIndexTree resto)
 
 -- Função de impressão em ordem da árvore
 printTree :: Tree -> IO ()
